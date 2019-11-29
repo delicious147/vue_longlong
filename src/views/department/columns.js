@@ -9,27 +9,27 @@ export default{
                 dataIndex: "department_name",
                 width: 200,
                 fixed: 'left',
-                // key: 'department_name',
+                inputData:['department_name']
                 },
                 {
                 title: "简介",
                 dataIndex: "department_content",
-                width: 400,
+                inputData:['department_content']
                 },
                 {
                 title: "创建时间",
                 dataIndex: "created_at",
-                width: '20%',
+                inputData:['created_at']
                 },
                 {
                 title: "更新时间",
                 dataIndex: "updated_at",
-                width: '20%',
+                inputData:['updated_at']
                 },
                 {
                 title: "人数",
                 dataIndex: "user_count",
-                width: '10%',
+                inputData:['user_count']
                 },
             ]
 }

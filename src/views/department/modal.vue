@@ -8,40 +8,44 @@
       :confirmLoading="confirmLoading"
       @cancel="handleCancel"
     >
-    <formView></formView>
+      <formView ref="getFormVlaue"></formView>
     </a-modal>
   </div>
 </template>
 <script>
-import form from './form'
-  export default {
-    components:{
-        formView:form
+import form from "./form";
+export default {
+  components: {
+    formView: form
+  },
+  data() {
+    return {
+      ModalText: "Content of the modal",
+      visible: false,
+      confirmLoading: false
+    };
+  },
+  props: ["title"],
+  methods: {
+    showModal() {
+      this.visible = true;
     },
-    data() {
-      return {
-        ModalText: 'Content of the modal',
-        visible: false,
-        confirmLoading: false,
-      };
+    handleOk(e) {
+        e.preventDefault();
+      this.$refs.getFormVlaue.form.validateFields((err, values) => {
+        if (!err) {
+            console.log('Received values of form: ', values);
+            this.add(values);
+        }
+    });
     },
-    props: ["title"],
-    methods: {
-      showModal() {
-        this.visible = true;
-      },
-      handleOk() {
-        this.ModalText = 'The modal will be closed after two seconds';
-        this.confirmLoading = true;
-        setTimeout(() => {
-          this.visible = false;
-          this.confirmLoading = false;
-        }, 2000);
-      },
-      handleCancel() {
-        console.log('Clicked cancel button');
-        this.visible = false;
-      },
+    handleCancel() {
+      console.log("Clicked cancel button");
+      this.visible = false;
     },
-  };
+    add(params = {}) {
+      this.$parent.add(params); //调用父组件的方法
+    }
+  }
+};
 </script>

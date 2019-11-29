@@ -9,7 +9,6 @@
         :rowKey="record => record.id"
         :dataSource="data"
         :loading="loading"
-        :scroll="{ x: 2500, y: 300 }"
     >
     <template slot="operation" slot-scope="text, record">
         <a href="javascript:;" @click="del(record.id)">Delete</a>
@@ -21,10 +20,12 @@
 <script>
 import basicTable from "../basic/basicTable";
 import columns from "./columns.js";
-import {apiLonglong} from '@/request/api';// 导入我们的api接口
+import {apiDepartment} from '@/request/api';// 导入我们的api接口
 import {apiDepartmentDel} from '@/request/api';// 导入我们的api接口
+import {apiDepartmentAdd} from '@/request/api';// 导入我们的api接口
 
 import modal from './modal'//弹出层
+// import modal from '../basic/modalDemo'//弹出层
 
 export default {
     extends: basicTable,
@@ -57,12 +58,22 @@ export default {
             console.log(data)
             });
         },
+        add(params = {}){
+            apiDepartmentAdd({
+                   ...params,
+                }).then(data => {
+                this.loading = false;
+                this.fetch()
+                // this.data = data.data;
+                // console.log(data)
+            });
+        },
         update(key){
             console.log(key)
         },
         fetch(params = {}) {
             this.loading = true;
-            apiLonglong({
+            apiDepartment({
                 // type: 0,                    
                 // sort: 1,
                 ...params,

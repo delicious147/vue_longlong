@@ -17,8 +17,8 @@ import router from '../router/index.js'
 //     axios.defaults.baseURL = 'http://api.123dailu.com/';
 // }
 
-// axios.defaults.baseURL ='http://test.pddln.com/api'
-axios.defaults.baseURL ='http://longlong-api-buy/v1'
+axios.defaults.baseURL ='http://test.pddln.com/api'
+// axios.defaults.baseURL ='http://longlong-api-buy/v1'
 
 // 请求超时时间
 axios.defaults.timeout = 10000;
