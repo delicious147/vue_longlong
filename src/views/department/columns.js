@@ -2,13 +2,12 @@ export default{
    columns :    [
                 // {
                 // title: "id",
-                // dataIndex: "id"
+                // dataIndex: "id",
+                // inputData:['id']
                 // },
                 {
                 title: "部门",
                 dataIndex: "department_name",
-                width: 200,
-                fixed: 'left',
                 inputData:['department_name']
                 },
                 {
@@ -30,6 +29,13 @@ export default{
                 title: "人数",
                 dataIndex: "user_count",
                 inputData:['user_count']
+                },
+
+
+                {
+                    title: '操作',
+                    dataIndex: 'operation',
+                    scopedSlots: { customRender: 'operation' },
                 },
             ]
 }

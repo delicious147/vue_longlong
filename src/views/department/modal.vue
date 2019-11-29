@@ -1,6 +1,5 @@
 <template>
   <div>
-    <a-button type="primary" @click="showModal">Add</a-button>
     <a-modal
       title="Title"
       :visible="visible"
@@ -8,7 +7,7 @@
       :confirmLoading="confirmLoading"
       @cancel="handleCancel"
     >
-      <formView ref="getFormVlaue"></formView>
+      <formView ref="Form"></formView>
     </a-modal>
   </div>
 </template>
@@ -20,31 +19,36 @@ export default {
   },
   data() {
     return {
-      ModalText: "Content of the modal",
       visible: false,
       confirmLoading: false
     };
   },
-  props: ["title"],
+  props: ["title","curd"],
   methods: {
-    showModal() {
-      this.visible = true;
-    },
     handleOk(e) {
         e.preventDefault();
-      this.$refs.getFormVlaue.form.validateFields((err, values) => {
+        this.$refs.Form.form.validateFields((err, values) => {
         if (!err) {
-            console.log('Received values of form: ', values);
-            this.add(values);
+            if(this.curd=='add'){
+                console.log('add')
+                this.add(values);
+            }else if(this.curd=='update'){
+                console.log('update')
+                this.update(values)
+            }
         }
     });
     },
     handleCancel() {
-      console.log("Clicked cancel button");
       this.visible = false;
     },
     add(params = {}) {
+        console.log(params)
       this.$parent.add(params); //调用父组件的方法
+    },
+    update(params = {}) {
+        console.log(params)
+      this.$parent.update(params); //调用父组件的方法
     }
   }
 };

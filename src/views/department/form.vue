@@ -1,8 +1,10 @@
 <template>
-  <a-form :form="form" @submit="handleSubmit">
+  <a-form :form="form" >
     <div id="app">
         <template v-for="(column,index) in columns">
-            <inputTemp :column="column" :key="index"></inputTemp>
+            <template v-if="column.dataIndex!='operation'">
+                <inputTemp :column="column" :key="index"></inputTemp>
+            </template>
         </template>
     </div>
   </a-form>
@@ -23,12 +25,7 @@ export default {
     };
   },
   methods: {
-    handleSelectChange(value) {
-      console.log(value);
-      this.form.setFieldsValue({
-        note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-      });
-    },
+
   },
 };
 </script>
