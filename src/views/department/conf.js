@@ -1,5 +1,5 @@
 export default{
-    api:"department",
+    api:"/department",
     columns :    [
                 // {
                 // title: "id",
