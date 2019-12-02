@@ -30,8 +30,6 @@ export default{
                 dataIndex: "user_count",
                 inputData:['user_count']
                 },
-
-
                 {
                     title: '操作',
                     dataIndex: 'operation',

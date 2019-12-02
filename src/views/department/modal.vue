@@ -1,33 +1,45 @@
 <template>
   <div>
     <a-modal
-      title="Title"
-      :visible="visible"
-      @ok="handleOk"
-      :confirmLoading="confirmLoading"
-      @cancel="handleCancel"
+        title="Title"
+        :visible="visible"
+        @ok="handleOk"
+        :confirmLoading="confirmLoading"
+        @cancel="handleCancel"
     >
-      <formView ref="Form"></formView>
+        <a-form :form="form" >
+            <div id="app">
+                <template v-for="(column,index) in columns">
+                    <template v-if="column.dataIndex!='operation'">
+                        <inputTemp :column="column" :key="index"></inputTemp>
+                    </template>
+                </template>
+            </div>
+        </a-form>
     </a-modal>
   </div>
 </template>
 <script>
-import form from "./form";
+import columns from "./columns.js";
+import input from '../basic/input'
 export default {
   components: {
-    formView: form
+    inputTemp:input,
   },
   data() {
     return {
       visible: false,
-      confirmLoading: false
+      confirmLoading: false,
+      formLayout: 'horizontal',
+      form: this.$form.createForm(this, { name: 'coordinated' }),
+      columns:columns.columns
     };
   },
   props: ["title","curd"],
   methods: {
     handleOk(e) {
         e.preventDefault();
-        this.$refs.Form.form.validateFields((err, values) => {
+        this.form.validateFields((err, values) => {
         if (!err) {
             if(this.curd=='add'){
                 console.log('add')
@@ -43,11 +55,9 @@ export default {
       this.visible = false;
     },
     add(params = {}) {
-        console.log(params)
       this.$parent.add(params); //调用父组件的方法
     },
     update(params = {}) {
-        console.log(params)
       this.$parent.update(params); //调用父组件的方法
     }
   }

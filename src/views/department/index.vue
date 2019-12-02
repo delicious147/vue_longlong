@@ -46,21 +46,19 @@ export default {
             this.$refs.Modal.visible = true;
             this.curd='add'
             this.$nextTick(() => {
-                this.$refs.Modal.$refs.Form.form.resetFields();
+                this.$refs.Modal.form.resetFields();
             });
         },
         showUpdateModal(record={}){
             this.$refs.Modal.visible = true;
             this.curd='update'
             this.row_id=record.id
+            console.log(this.row_id)
             this.$nextTick(() => {
-                var params=record
-                delete(params.id)
-                this.$refs.Modal.$refs.Form.form.setFieldsValue(params);
+                this.$refs.Modal.form.setFieldsValue(record);
             });
         },
         del(key){
-            // alert(key)
             this.loading = true;
             apiDepartmentDel({
                 id:key
