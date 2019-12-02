@@ -1,5 +1,6 @@
 export default{
-   columns :    [
+    api:"department",
+    columns :    [
                 // {
                 // title: "id",
                 // dataIndex: "id",

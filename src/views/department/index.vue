@@ -14,7 +14,7 @@
                 <a href="javascript:;" @click="showUpdateModal(record)">Updeat</a>
             </template>
         </a-table>
-        <modal ref="Modal" :curd="curd"></modal>
+        <modal ref="Modal" :curd="curd" :columns="columns"></modal>
     </div>
 </template>
 <script>
@@ -24,9 +24,8 @@ import {apiDepartment} from '@/request/api';// 导入我们的api接口
 import {apiDepartmentDel} from '@/request/api';// 导入我们的api接口
 import {apiDepartmentAdd} from '@/request/api';// 导入我们的api接口
 import {apiDepartmentUpdate} from '@/request/api';// 导入我们的api接口
+import modal from '../basic/modalForm'//弹出层
 
-import modal from './modal'//弹出层
-// import modal from '../basic/modalDemo'//弹出层
 
 export default {
     extends: basicTable,

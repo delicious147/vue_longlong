@@ -20,8 +20,7 @@
   </div>
 </template>
 <script>
-import columns from "./columns.js";
-import input from '../basic/input'
+import input from './input'
 export default {
   components: {
     inputTemp:input,
@@ -32,10 +31,10 @@ export default {
       confirmLoading: false,
       formLayout: 'horizontal',
       form: this.$form.createForm(this, { name: 'coordinated' }),
-      columns:columns.columns
+    //   columns:columns.columns
     };
   },
-  props: ["title","curd"],
+  props: ["title","curd","columns"],
   methods: {
     handleOk(e) {
         e.preventDefault();
