@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <h1>Test</h1>
+        <h1>{{title}}</h1>
         <a-button type="primary" @click="showAddModal">Add</a-button>
         <a-table
             :columns="columns"
@@ -16,24 +16,28 @@
                 <a href="javascript:;" @click="showUpdateModal(record)">Updeat</a>
             </template>
         </a-table>
-        <modal ref="Modal" :curd="curd" :columns="columns"></modal>
+        <addModal ref="addModal"  :columns="columns" ></addModal>
+        <updateModal ref="updateModal"  :columns="columns" ></updateModal>
     </div>
 </template>
 <script>
 import {get, post ,del,put} from '@/request/http'
-import modal from './modalForm'//弹出层
+import addModal from './addModalForm'//弹出层
+import updateModal from './updateModalForm'//弹出层
 
 export default {
     components:{
-        modal:modal,
+        addModal:addModal,
+        updateModal:updateModal
     },
-    props: ["columns","api"],
+    props: ["title","columns","api"],
     data(){
         return{
             data: [],
             pagination: {},
             loading: false,
-            curd:'add'
+            row_id:'',
+        
         }
     },
     mounted() {
@@ -46,27 +50,24 @@ export default {
             pager.current = pagination.current;
             this.pagination = pager;
             this.fetch({
-            results: pagination.pageSize,
-            page: pagination.current,
-            sortField: sorter.field,
-            sortOrder: sorter.order,
-            ...filters,
+                results: pagination.pageSize,
+                page: pagination.current,
+                sortField: sorter.field,
+                sortOrder: sorter.order,
+                ...filters,
             });
         },
         showAddModal() {
-            this.$refs.Modal.visible = true;
-            this.curd='add'
+            this.$refs.addModal.visible = true;
             this.$nextTick(() => {
-                this.$refs.Modal.form.resetFields();
+                this.$refs.addModal.form.resetFields();
             });
         },
         showUpdateModal(record={}){
-            this.$refs.Modal.visible = true;
-            this.curd='update'
             this.row_id=record.id
-            console.log(this.row_id)
+            this.$refs.updateModal.visible = true;
             this.$nextTick(() => {
-                this.$refs.Modal.form.setFieldsValue(record);
+                this.$refs.updateModal.form.setFieldsValue(record);
             });
         },
         del(key){
@@ -83,7 +84,6 @@ export default {
                    ...params,
                 }).then(data => {
                 this.fetch();
-                this.$refs.Modal.visible = false;
             });
         },
         update(params = {}){
@@ -93,7 +93,6 @@ export default {
                    ...params,
                 }).then(data => {
                 this.fetch();
-                this.$refs.Modal.visible = false;
             });
         },
         fetch(params = {}) {

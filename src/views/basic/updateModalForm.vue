@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-modal
-        title="Title"
+        title="编辑"
         :visible="visible"
         @ok="handleOk"
         :confirmLoading="confirmLoading"
@@ -10,8 +10,10 @@
         <a-form :form="form" >
             <div id="app">
                 <template v-for="(column,index) in columns">
-                    <template v-if="column.dataIndex!='operation'">
-                        <inputTemp :column="column" :key="index"></inputTemp>
+                    <template v-if="column.update==true ">
+                        <template v-if="column.dataIndex!='operation' ">
+                            <inputTemp :column="column" :key="index"></inputTemp>
+                        </template>
                     </template>
                 </template>
             </div>
@@ -31,30 +33,24 @@ export default {
       confirmLoading: false,
       formLayout: 'horizontal',
       form: this.$form.createForm(this, { name: 'coordinated' }),
-    //   columns:columns.columns
     };
   },
-  props: ["title","curd","columns"],
+  props: ["columns"],
   methods: {
     handleOk(e) {
         e.preventDefault();
         this.form.validateFields((err, values) => {
         if (!err) {
-            if(this.curd=='add'){
-                console.log('add')
-                this.add(values);
-            }else if(this.curd=='update'){
+
                 console.log('update')
                 this.update(values)
-            }
+                this.visible = false;
+  
         }
     });
     },
     handleCancel() {
       this.visible = false;
-    },
-    add(params = {}) {
-      this.$parent.add(params); //调用父组件的方法
     },
     update(params = {}) {
       this.$parent.update(params); //调用父组件的方法

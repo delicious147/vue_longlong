@@ -7,29 +7,39 @@ export default{
                 // inputData:['id']
                 // },
                 {
-                title: "部门",
-                dataIndex: "department_name",
-                inputData:['department_name']
+                    title: "部门",
+                    dataIndex: "department_name",
+                    inputData:['department_name'],
+                    update:true,
+                    add:true,
                 },
                 {
-                title: "简介",
-                dataIndex: "department_content",
-                inputData:['department_content']
+                    title: "简介",
+                    dataIndex: "department_content",
+                    inputData:['department_content'],
+                    update:true,
+                    add:true,
                 },
                 {
-                title: "创建时间",
-                dataIndex: "created_at",
-                inputData:['created_at']
+                    title: "创建时间",
+                    dataIndex: "created_at",
+                    inputData:['created_at'],
+                    update:false,
+                    add:false,
                 },
                 {
-                title: "更新时间",
-                dataIndex: "updated_at",
-                inputData:['updated_at']
+                    title: "更新时间",
+                    dataIndex: "updated_at",
+                    inputData:['updated_at'],
+                    update:false,
+                    add:false,
                 },
                 {
-                title: "人数",
-                dataIndex: "user_count",
-                inputData:['user_count']
+                    title: "人数",
+                    dataIndex: "user_count",
+                    inputData:['user_count'],
+                    update:false,
+                    add:false,
                 },
                 {
                     title: '操作',

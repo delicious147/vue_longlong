@@ -1,5 +1,5 @@
 <template>
-    <index  :columns="columns" :api="api"></index>
+    <index  :title="title" :columns="columns" :api="api"></index>
 </template>
 <script>
 import basicIndex from "../basic/basicIndex";
@@ -10,6 +10,7 @@ export default {
     },
     data(){
         return{
+            title:"Department",
             columns:conf.columns,
             api:conf.api,
         }
